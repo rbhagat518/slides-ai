@@ -1,4 +1,4 @@
-# Ai-Slides
+# Slides-AI
 ## Jonathan Knittel and Ram Bhagat
 ### HackBU 2023, February 4th
 
