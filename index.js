@@ -23,5 +23,5 @@ app.listen(port, ()=> {
 app.post('/',(req,res)=>{
     let text = req.body.theTextbox; 
     console.log(text);
-    res.sendFile('index.html', {root: __dirname + '/public/html'});
+    res.redirect('');
 });
