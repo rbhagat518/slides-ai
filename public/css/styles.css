@@ -2,3 +2,21 @@ html{
     background-color: #1F4555;
     color: white;
 }
+
+div{
+    padding-top: 3%;
+    display: flex;
+    justify-content: center;
+    font-size: 400%;
+    font-family: 'Courier New', monospace;
+}
+
+form{
+    padding-top: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+input{
+    width: 50%;
+}
