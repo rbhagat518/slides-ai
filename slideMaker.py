@@ -1,4 +1,5 @@
 from pptx import Presentation
+from pptx.util import Inches
 # script to parse the text file that the ai made
 # and then convert it into a ppptx formmat
 
@@ -58,9 +59,11 @@ def addSlideObjectIntoSlideshow(prensation, slideObject):
        return
 
     # creating a slide that has a body
-    slide = prs.slides.add_slide(prs.slide_layouts[1])
+    slide = prs.slides.add_slide(prs.slide_layouts[3])
     slide.shapes.title.text = slideObject[1]
     tf = slide.shapes.placeholders[1].text_frame
+    slide.shapes.placeholders[2].text_frame.text = ""
+    img = slide.shapes.add_picture("img.png", Inches(5.5), Inches(2))
     for line in slideObject[2]:
         p = tf.add_paragraph()
         if "â€¢ " in line:
