@@ -57,15 +57,3 @@ app.post('/',(req,res)=>{
     // call a second python script to create the slide show
     PythonShell.run('createPresentation.py', options, pythonFunc)
 });
-
-// download the powerpoint file
-app.get("/download/:filename", (req, res) => {    const filePath = __dirname + "/public/slides/" + req.params.filename;    res.download(
-    filePath, 
-    "AIGeneratedSlideShow.pptx", // Remember to include file extension
-    (err) => {            if (err) {
-            res.send({
-                error : err,
-                msg   : "Problem downloading the file"
-            })
-        }    });
-});
