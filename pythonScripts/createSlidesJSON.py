@@ -51,4 +51,10 @@ def linesIntoSlideObjects(lines):
     return slides
 
 with open("public/slideComponents/slidesObjects/slides.json", "w" ) as f:
-    json.dump(linesIntoSlideObjects(textIntoLines("public/slideComponents/text/inputTxt.txt")), f, indent=4),
+    lines = textIntoLines("public/slideComponents/text/inputTxt.txt")
+    print(lines)
+
+    slides = linesIntoSlideObjects(lines)
+    print(slides)
+
+    json.dump(slides, f, indent=4)

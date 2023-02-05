@@ -25,7 +25,6 @@ def addSlideObjectIntoSlideshow(key):
             p.text = line
             p.level = 0
 
-slides = {1: "test"}
 with open("public/slideComponents/slidesObjects/slides.json", "r" ) as f:
     slides = json.load(f)
 prs = Presentation()
