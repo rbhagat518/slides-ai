@@ -17,3 +17,7 @@ have a way to tell user when the creation process finshes
 have a way for the user to fine tune a previsouly made presentation
 
 add more slide formats that are more dynamic to the slide content
+
+add user accounts with authentication
+
+add error handling on scripts to prevent server crashes
