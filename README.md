@@ -10,8 +10,4 @@ https://python-pptx.readthedocs.io/en/latest/
 https://www.npmjs.com/package/python-shell
 
 # TODO
-call the chat api to get the text file
-
-call the dalle api to get images for the slides
-
 put all of the files into a database where each user has a their own files

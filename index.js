@@ -23,15 +23,15 @@ app.listen(port, ()=> {
 // python options
 var options = {
     mode: 'text',
-    pythonPath: __dirname + '/python310/scripts/python.exe',
+    pythonPath: __dirname + '/python3_7_1env/scripts/python.exe',
     pythonOptions: [],
     scriptPath: __dirname + '/pythonScripts',
     args: []
 };
 
-async function runPython(filename) {
+async function runPython() {
     const { success, err = '', results } = await new Promise((resolve, reject) => {
-      PythonShell.run(filename, options, function(
+      PythonShell.run('powerPointify.py', options, function(
         err,
         results
       ) {
@@ -44,25 +44,21 @@ async function runPython(filename) {
     });
   };
 
-async function runScripts(){
-    options["pythonPath"] = __dirname + '/python310/scripts/python.exe'
-    await runPython("textAi.py")
-    console.log("text created")
-    
-    await runPython("createSlidesJSON.py")
-
-    await runPython("imageAi.py")
-    console.log("images created")
-    
-    options["pythonPath"] = __dirname + '/python36/scripts/python.exe'
-    await runPython("createPresentation.py")
-    console.log("done")
+async function runScripts(theme){
+    console.log("loading...")
+    await runPython();
+    console.log("completed: " + theme);
 }
 
 // here you can get the value of from the textbox 
-app.post('/',(req,res)=>{
-    let text = req.body.theTextbox; 
-    console.log(text);
+app.post('/', (req,res)=>{
+    // save user theme into python args[0]
+    theme = req.body.theTextbox
+    options['args'].push(theme)
+
+    // run the python script
+    runScripts(theme);
+
+    // clear POST variable and stay on the same page
     res.redirect('');
-    runScripts();
 });
