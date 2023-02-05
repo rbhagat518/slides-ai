@@ -11,3 +11,9 @@ https://www.npmjs.com/package/python-shell
 
 # TODO
 put all of the files into a database where each user has a their own files
+
+have a way to tell user when the creation process finshes
+
+have a way for the user to fine tune a previsouly made presentation
+
+add more slide formats that are more dynamic to the slide content
