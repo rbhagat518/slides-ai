@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const PythonShell = require('python-shell').PythonShell;
 const app = express();
 const port = 7777;
 
@@ -19,9 +20,52 @@ app.listen(port, ()=> {
     console.log(`Now listening on port ${port}`);
 });
 
+// python options
+var options = {
+    mode: 'text',
+    pythonPath: __dirname + '/pyenv/scripts/python.exe',
+    pythonOptions: [],
+    scriptPath: __dirname + '/pythonScripts',
+    args: []
+};
+
+// error handling python function
+const pythonFunc = function (err, results) {
+    if (err) 
+      throw err;
+    // Results is an array consisting of messages collected during execution
+    console.log('results: %j', results);
+};
+
 // here you can get the value of from the textbox 
 app.post('/',(req,res)=>{
     let text = req.body.theTextbox; 
     console.log(text);
     res.redirect('');
+
+    // call the chat api to get the text file
+
+    // -----
+
+    // call a python script to create the JSON object
+    PythonShell.run('createSlidesJSON.py', options, pythonFunc)
+
+    // call the dalle api to get images for the slides
+
+    // -----
+
+    // call a second python script to create the slide show
+    PythonShell.run('createPresentation.py', options, pythonFunc)
+});
+
+// download the powerpoint file
+app.get("/download/:filename", (req, res) => {    const filePath = __dirname + "/public/slides/" + req.params.filename;    res.download(
+    filePath, 
+    "AIGeneratedSlideShow.pptx", // Remember to include file extension
+    (err) => {            if (err) {
+            res.send({
+                error : err,
+                msg   : "Problem downloading the file"
+            })
+        }    });
 });

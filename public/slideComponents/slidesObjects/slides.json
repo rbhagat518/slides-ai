@@ -1,0 +1,36 @@
+{
+    "1": {
+        "title": "Welcome to the World of Hackathons!",
+        "body": []
+    },
+    "2": {
+        "title": "What is a Hackathon?",
+        "body": [
+            "A hackathon is a time-limited event where people come together to solve a problem, build a project, or create a new product."
+        ]
+    },
+    "3": {
+        "title": "The Benefits of Attending a Hackathon",
+        "body": [
+            "\u00e2\u20ac\u00a2 Meet new people",
+            "\u00e2\u20ac\u00a2 Test and refine your technical skills",
+            "\u00e2\u20ac\u00a2 Network with industry professionals",
+            "\u00e2\u20ac\u00a2 Win prizes or even a job"
+        ]
+    },
+    "4": {
+        "title": "Tips for Attending a Hackathon",
+        "body": [
+            "\u00e2\u20ac\u00a2 Come prepared with a project idea",
+            "\u00e2\u20ac\u00a2 Bring any necessary materials or equipment",
+            "\u00e2\u20ac\u00a2 Have a plan for the challenge ahead",
+            "\u00e2\u20ac\u00a2 Work in a team and collaborate"
+        ]
+    },
+    "5": {
+        "title": "Conclusion",
+        "body": [
+            "Hackathons can provide a great opportunity to learn new skills, network, and even win prizes. With the right preparation and attitude, hackathons can be a rewarding experience."
+        ]
+    }
+}

@@ -1,5 +1,5 @@
-from pptx import Presentation
-from pptx.util import Inches
+import json
+
 # script to parse the text file that the ai made
 # and then convert it into a ppptx formmat
 
@@ -15,7 +15,7 @@ def textIntoLines(filename):
 
 # make the slides into tuples of format (slideNumber, title, bodyLines)
 def linesIntoSlideObjects(lines):
-    slides = []
+    slides = {}
     index = 0
     while index < len(lines):
         # skip over the slide number
@@ -46,34 +46,9 @@ def linesIntoSlideObjects(lines):
             if index >= len(lines):
                 break
 
-        # add this slide to the list
-        slides.append((len(slides) + 1, title, bodyLines))    
+        # add this slide to the list  
+        slides[str(len(slides) + 1)] = {"title": title, "body": bodyLines}
     return slides
 
-def addSlideObjectIntoSlideshow(prensation, slideObject):
-    # title slide case, no body is given
-    if len(slideObject[2]) == 0:
-       slide = prs.slides.add_slide(prs.slide_layouts[0])
-       slide.shapes.title.text = slideObject[1]
-       slide.placeholders[1].text = "Made With AI and Love"
-       return
-
-    # creating a slide that has a body
-    slide = prs.slides.add_slide(prs.slide_layouts[3])
-    slide.shapes.title.text = slideObject[1]
-    tf = slide.shapes.placeholders[1].text_frame
-    slide.shapes.placeholders[2].text_frame.text = ""
-    img = slide.shapes.add_picture("img.png", Inches(5.5), Inches(2))
-    for line in slideObject[2]:
-        p = tf.add_paragraph()
-        if "â€¢ " in line:
-            p.text = line[line.index("â€¢ ") + 4:]
-            p.level = 1
-        else:
-            p.text = line
-            p.level = 0
-
-prs = Presentation()
-for slide in linesIntoSlideObjects(textIntoLines("inputTxt.txt")):
-    addSlideObjectIntoSlideshow(prs, slide)
-prs.save("output.pptx")
+with open("public/slideComponents/slidesObjects/slides.json", "w" ) as f:
+    json.dump(linesIntoSlideObjects(textIntoLines("public/slideComponents/text/inputTxt.txt")), f, indent=4),
