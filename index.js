@@ -29,6 +29,7 @@ var options = {
     args: []
 };
 
+// function to run a python script and retreive errors
 async function runPython() {
     const { success, err = '', results } = await new Promise((resolve, reject) => {
       PythonShell.run('powerPointify.py', options, function(
@@ -52,7 +53,7 @@ async function runScripts(theme){
 
 // here you can get the value of from the textbox 
 app.post('/', (req,res)=>{
-    // save user theme into python args[0]
+    // save user theme into python args[1]
     theme = req.body.theTextbox
     options['args'].push(theme)
 
@@ -61,5 +62,5 @@ app.post('/', (req,res)=>{
     options['args'] = []
 
     // clear POST variable and stay on the same page
-    res.redirect('');
+    res.redirect('/');
 });
