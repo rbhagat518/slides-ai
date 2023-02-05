@@ -23,37 +23,46 @@ app.listen(port, ()=> {
 // python options
 var options = {
     mode: 'text',
-    pythonPath: __dirname + '/pyenv/scripts/python.exe',
+    pythonPath: __dirname + '/python310/scripts/python.exe',
     pythonOptions: [],
     scriptPath: __dirname + '/pythonScripts',
     args: []
 };
 
-// error handling python function
-const pythonFunc = function (err, results) {
-    if (err) 
-      throw err;
-    // Results is an array consisting of messages collected during execution
-    console.log('results: %j', results);
-};
+async function runPython(filename) {
+    const { success, err = '', results } = await new Promise((resolve, reject) => {
+      PythonShell.run(filename, options, function(
+        err,
+        results
+      ) {
+        if (err) {
+            console.log(err)
+          reject({ success: false, err });
+        }
+        resolve({ success: true, results });
+      });
+    });
+  };
+
+async function runScripts(){
+    options["pythonPath"] = __dirname + '/python310/scripts/python.exe'
+    await runPython("textAi.py")
+    console.log("text created")
+    
+    await runPython("createSlidesJSON.py")
+
+    await runPython("imageAi.py")
+    console.log("images created")
+    
+    options["pythonPath"] = __dirname + '/python36/scripts/python.exe'
+    await runPython("createPresentation.py")
+    console.log("done")
+}
 
 // here you can get the value of from the textbox 
 app.post('/',(req,res)=>{
     let text = req.body.theTextbox; 
     console.log(text);
     res.redirect('');
-
-    // call the chat api to get the text file
-
-    // -----
-
-    // call a python script to create the JSON object
-    PythonShell.run('createSlidesJSON.py', options, pythonFunc)
-
-    // call the dalle api to get images for the slides
-
-    // -----
-
-    // call a second python script to create the slide show
-    PythonShell.run('createPresentation.py', options, pythonFunc)
+    runScripts();
 });
