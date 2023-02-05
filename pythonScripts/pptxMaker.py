@@ -41,10 +41,11 @@ class tiredStudent():
         
         for line in slideObject["body"]:
             p = tf.add_paragraph()
-            p.font.size = Pt(16)
+            p.font.size = Pt(12)
             if "• " in line:
                 p.text = line[line.index("• ") + 2:]
                 p.level = 1
             else:
                 p.text = line
                 p.level = 0
+  

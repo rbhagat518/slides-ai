@@ -58,6 +58,7 @@ app.post('/', (req,res)=>{
 
     // run the python script
     runScripts(theme);
+    options['args'] = []
 
     // clear POST variable and stay on the same page
     res.redirect('');

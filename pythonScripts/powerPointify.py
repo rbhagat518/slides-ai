@@ -6,12 +6,13 @@ from pptxMaker import tiredStudent
 import sys
 
 if __name__ == "__main__": 
-    key = "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"
+    key = "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"
     orginization = "org-QouCrr1mRGRGOAqomk5pcpqq"
     theme = sys.argv[1]
+    # theme = "bugs"
     
     # step one, create a text string from a chat ai
-    textResponse = chatBot(key, orginization).getChatResponse(theme, 1024, 0.3)
+    textResponse = chatBot(key, orginization).getChatResponse(theme, 1024, 0)
     print(textResponse)
     
     # step two, make that text string into a more useful object format
